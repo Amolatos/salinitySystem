@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SalinityReadingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MangroveController;
+use App\Http\Controllers\SensorCalibrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +39,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/readings', [SalinityReadingController::class, 'index']);
     Route::get('/readings/latest', [SalinityReadingController::class, 'latest']);
     Route::get('/readings/by-location', [SalinityReadingController::class, 'getByLocation']);
+
+    // Mangrove routes
+    Route::post('/mangroves/{species}/measurements', [MangroveController::class, 'apiSubmitMeasurement']);
+
+    // Sensor calibration routes
+    Route::post('/sensors/calibrate', [SensorCalibrationController::class, 'calibrate']);
 });
